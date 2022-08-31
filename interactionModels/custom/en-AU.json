@@ -1,0 +1,96 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "kendra search",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "HelloWorldIntent",
+          "slots": [],
+          "samples": [
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "SearchKendraIntent",
+          "slots": [
+            {
+              "name": "searchString",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "search  {searchString}   "
+          ]
+        },
+        {
+          "name": "SearchKendraAPLRequestIntent",
+          "slots": [
+            {
+              "name": "searchString",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "can you get something on {searchString}",
+            "find me about {searchString}",
+            "get me something about {searchString}"
+          ]
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "SearchKendraIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "searchString",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1491033553044.645238538396"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1491033553044.645238538396",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Search for what"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "11"
+}
