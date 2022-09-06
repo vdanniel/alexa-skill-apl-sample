@@ -14,7 +14,7 @@ const datasource = {
         "type": "object",
         "properties": {
             "backgroundImage": "",
-            "displayFullscreen": false,
+            "displayFullscreen": true,
             "headerTitle": "",
             "headerSubtitle": "",
             "logoUrl": "",
@@ -97,11 +97,12 @@ const SearchKendraAPLRequestIntentHandler = {
             // const response = await request('https://u8hjnibuce.execute-api.us-east-1.amazonaws.com/findvideo/orion');
             var search_text = handlerInput.requestEnvelope.request.intent.slots.searchString.value;
             const return_url = await getRelevantURL(search_text);
+            //https://d1bl50a00eskt.cloudfront.net/artifacts/mediasearch/sample-media/video6.mp4?#t=30
             console.log("Return Url " + return_url)
             if( return_url ){
                 datasource['videoPlayerTemplateData']['properties']['videoSources'][0] = return_url;
-                datasource['videoPlayerTemplateData']['properties']['headerTitle'] = "Top match for your search on "+ search_text;
-                datasource['videoPlayerTemplateData']['properties']['headerSubtitle'] = "From Kendra"
+                datasource['videoPlayerTemplateData']['properties']['headerTitle'] = "We have found your needle! ";
+                datasource['videoPlayerTemplateData']['properties']['headerSubtitle'] = search_text;
             }
             else{
                 datasource['videoPlayerTemplateData']['properties']['headerTitle'] = "Sorry no content found for your search on : " + search_text;
@@ -118,23 +119,13 @@ const SearchKendraAPLRequestIntentHandler = {
 
 const getRelevantURL = (searchString) => new Promise((resolve, reject) => {
     console.log("Logger in promise");
-    const options = {
-        hostname: 'u8hjnibuce.execute-api.us-east-1.amazonaws.com',
-        port: 443,
-        path: '/findvideo/orion',
-        method: 'GET',
-    };
-    console.log("Logger in promise 2" + JSON.stringify(options));
     try{
     //const return_url = await doRequest("https://u8hjnibuce.execute-api.us-east-1.amazonaws.com/findvideo/orion")
-        https.get('https://u8hjnibuce.execute-api.us-east-1.amazonaws.com/findvideo/orion', (resp) => {
+        https.get('https://u8hjnibuce.execute-api.us-east-1.amazonaws.com/findvideo/' + searchString, (resp) => {
           let data = '';
-        
           // A chunk of data has been received.
           resp.on('data', (chunk) => {
             data += chunk;
-            //console.log(data);
-            //resolve(data);
           });
         
           // The whole response has been received. Print out the result.

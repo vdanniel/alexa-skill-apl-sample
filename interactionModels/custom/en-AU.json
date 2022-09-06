@@ -51,6 +51,8 @@
             }
           ],
           "samples": [
+            "tell me about {searchString}",
+            "what is {searchString}",
             "can you get something on {searchString}",
             "find me about {searchString}",
             "get me something about {searchString}"
@@ -92,5 +94,5 @@
       }
     ]
   },
-  "version": "11"
+  "version": "12"
 }
